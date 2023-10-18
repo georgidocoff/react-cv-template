@@ -29,8 +29,11 @@ const Profile = (props) => {
     if (data.includes("@")) {
       window.open(`mailto:${data}`, "_blank");
       return navigate(props?.path);
-    } else if (data.includes("https://")) {
+    } else if (data?.includes("https://")) {
       window.open(`${data}`, "_blank");
+    } else if (data?.includes("+359")) {
+      window.open(`tel:${data}`);
+      return navigate(props?.path);
     }
   };
 
@@ -122,7 +125,16 @@ const Profile = (props) => {
           <div>
             <b>{e.name}</b>
           </div>
-          <div>{e.content}</div>
+          {(e.link && (
+            <Button
+              style={{ backgroundColor: "transparent", border:"none" }}
+              label={e?.content || e?.link}
+              onClick={() => {
+                window.open(`${e?.link}`, "_blank");
+              }}
+            />
+          )) || <div>{e.content}</div>}
+
           <div>{e.date}</div>
         </div>
       );
