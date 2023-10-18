@@ -1,9 +1,9 @@
 import React from "react";
 
 const Home = () =>{
-    return(<div className="cv-card flex">
-    <div className="cv-title flex">
-      <p className="contact-name">UNDER CONSTRUCTION</p>
+    return(<div className="home-card">
+    <div>
+      <p className="home-title">UNDER CONSTRUCTION</p>
     </div>
   </div>);
 }

@@ -39,3 +39,28 @@
 :root{
   max-width: fit-content !important;
 }
+
+.home-card{
+  border-color: rgb(182, 221, 255);
+    border-style: solid;
+    border-radius: 1rem;
+    /* border-width: 1rem; */
+    background-color: #019CCC;
+    print-color-adjust: exact;
+    height: 250px;
+
+    width: 100vw;
+    max-width: 100vw !important ;
+    /* justify-content:left; */
+    z-index: 1;
+}
+
+.home-title{
+  position: absolute;
+  /* padding-top: 0;
+  padding-left: calc(300px) !important; */
+  font-size: 3rem;
+  display: inline-block !important;
+  color: white !important;
+  object-fit: contain;
+}
