@@ -6,12 +6,14 @@ export const getCvById = async (id) => {
             'content-type': 'application/json',
             'Abp.TenantId': 1,
         }
+    }).catch((err)=>{
+        //handle with error
     });
     let jsonResult = await res?.json();
-    if (res.ok) {
+    if (res?.ok) {
         return jsonResult?.result;
     } else {
-        throw jsonResult?.message;
+        //handle with error
     }
 }
 export const getImageByCvId = async (id) => {
@@ -20,11 +22,14 @@ export const getImageByCvId = async (id) => {
             'content-type': 'application/json',
             'Abp.TenantId': 1,
         }
+    }).catch((err)=>{
+        //handle with error
     });
+    
     let jsonResult = await res?.json();
-    if (res.ok) {
+    if (res?.ok) {
         return jsonResult?.result;
     } else {
-        throw jsonResult?.message;
+        //handle with error
     }
 }

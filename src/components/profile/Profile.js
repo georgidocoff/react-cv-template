@@ -11,20 +11,20 @@ const Profile = (props) => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [image, setImage] = useState("");
-  
+
   useEffect(() => {
     const path = props?.path?.split("/");
     getCvById(path[path.length - 1]).then((res) => {
-      setProfile(JSON.parse(res));
+      setProfile(res ? JSON.parse(res) : {});
     });
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const path = props?.path?.split("/");
-    getImageByCvId(path[path.length - 1]).then((res)=>{
-      setImage(res);
-    })
-  },[])
+    getImageByCvId(path[path.length - 1]).then((res) => {
+      setImage(res ? res : "");
+    });
+  }, []);
   const contactHandler = (data) => {
     if (data.includes("@")) {
       window.open(`mailto:${data}`, "_blank");
@@ -97,7 +97,7 @@ const Profile = (props) => {
         {renderContentView(data?.projects)}
         <h3 hidden={!data?.experience}>Experience</h3>
         {renderContentView(data?.experience)}
-        {(!data?.projects && !data?.experience) && <h3>No data found!</h3>}
+        {!data?.projects && !data?.experience && <h3>No data found!</h3>}
       </>
     );
   };
@@ -132,7 +132,14 @@ const Profile = (props) => {
   return (
     <>
       <div className="cv-card flex">
-        <Image src= {image==""?'/images/avatar.png':("data:image/png;base64, " + image)} alt="profile-image" />
+        <Image
+          src={
+            image == ""
+              ? "/images/avatar.png"
+              : "data:image/png;base64, " + image
+          }
+          alt="profile-image"
+        />
         <div className="cv-title flex">
           <p className="contact-name">{profile?.name}</p>
           {contactView(profile?.contacts)}
