@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { Image } from "primereact/image";
 import { Button } from "primereact/button";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 import { getCvById, getImageByCvId } from "../../services/api";
 
@@ -11,19 +13,31 @@ const Profile = (props) => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(
+    !props?.projects && !props?.experience
+  );
 
   useEffect(() => {
     const path = props?.path?.split("/");
-    getCvById(path[path.length - 1]).then((res) => {
-      setProfile(res ? JSON.parse(res) : {});
-    });
+    getCvById(path[path.length - 1])
+      .then((res) => {
+        setLoading(props?.projects && props?.experience);
+        setProfile(res ? JSON.parse(res) : {});
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
     const path = props?.path?.split("/");
-    getImageByCvId(path[path.length - 1]).then((res) => {
-      setImage(res ? res : "");
-    });
+    getImageByCvId(path[path.length - 1])
+      .then((res) => {
+        setImage(res ? res : "");
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, []);
   const contactHandler = (data) => {
     if (data.includes("@")) {
@@ -100,7 +114,9 @@ const Profile = (props) => {
         {renderContentView(data?.projects)}
         <h3 hidden={!data?.experience}>Experience</h3>
         {renderContentView(data?.experience)}
-        {!data?.projects && !data?.experience && <h3>No data found!</h3>}
+        {!loading && !data?.projects && !data?.experience && (
+          <h3>No data found!</h3>
+        )}
       </>
     );
   };
@@ -127,7 +143,7 @@ const Profile = (props) => {
           </div>
           {(e.link && (
             <Button
-              style={{ backgroundColor: "transparent", border:"none" }}
+              style={{ backgroundColor: "transparent", border: "none" }}
               label={e?.content || e?.link}
               onClick={() => {
                 window.open(`${e?.link}`, "_blank");
@@ -158,7 +174,17 @@ const Profile = (props) => {
         </div>
       </div>
       <div className="cv-card left-column">{leftView(profile)}</div>
-      <div className="cv-content">{contentView(profile)}</div>
+
+      <div className="cv-content">
+        <div hidden={!loading}>
+          <ProgressSpinner
+            style={{ width: "12vw", height: "12vh" }}
+            strokeWidth="1"
+            animationDuration="1s"
+          />
+        </div>
+        {contentView(profile)}
+      </div>
     </>
   );
 };

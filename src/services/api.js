@@ -8,6 +8,7 @@ export const getCvById = async (id) => {
         }
     }).catch((err)=>{
         //handle with error
+        return 'error'
     });
     let jsonResult = await res?.json();
     if (res?.ok) {
@@ -24,6 +25,7 @@ export const getImageByCvId = async (id) => {
         }
     }).catch((err)=>{
         //handle with error
+        return 'error';
     });
     
     let jsonResult = await res?.json();
