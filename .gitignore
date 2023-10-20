@@ -10,6 +10,8 @@
 
 # production
 /build
+src/common/app-settings.js
+prod.bat
 
 # misc
 .DS_Store
