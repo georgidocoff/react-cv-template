@@ -40,26 +40,128 @@ To run this project, you will need the following software:
    After starting, application will run locally at [http://localhost:3000](http://localhost:3000).
 
 2. **Start the Server**
-   If You do not have a started server you need to import the `profile.json` file at `Profile` component as shown all objects are equel like experience.
+   If You do not have a started server you need to generate `profile.json` file from `schema` at `Profile` component as shown
 
 ```
 {
-    "name":"Person",
-    "contracts":[{}],
-    "skills":[{}],
-    "educations":[{}],
-    "certificates":[{}],
-    "languages":[{}],
-    "hobies":[{}],
-    "projects":[{}],
-    "experience":[{
-        "name": "",
-        "link": "",
-        "content": "",
-        "date": "",
-        "orderIdx": 1
-    }]
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Person Name"
+    },
+    "contacts": {
+      "type": "array",
+      "description": "An array of contact information",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "Posible typies: emial, phone, location, linkedin"
+          },
+          "class": {
+            "type": "string",
+            "description": "For selected typies: contact-email, contact-phone, contact-location, contact-linkedin"
+          },
+          "icon": {
+            "type": "string",
+            "description": "For selected typies: pi pi-envelope mr-2, pi pi-mobile mr-2, pi pi-home mr-2, pi pi-linkedin mr-2"
+          }
+        },
+        "required": [ "name", "type", "class", "icon" ]
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "An array of skills",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "educations": {
+      "type": "array",
+      "description": "An array of educations",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "description": "An array of certificates",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "languages": {
+      "type": "array",
+      "description": "An array of languages",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "hobies": {
+      "type": "array",
+      "description": "An array of hobies",
+      "items": {
+        "$ref": "#/definitions/item"
+      }
+    },
+    "projects": {
+      "$ref": "#/definitions/project"
+    },
+    "experience": {
+      "$ref": "#/definitions/project"
+    },
+    "summary": {
+      "$ref": "#/definitions/project"
+    }
+  },
+  "required": [ "name", "contacts" ],
+  "definitions": {
+    "item": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "link": {
+          "type": "string",
+          "format": "uri"
+        },
+        "type": { "type": "string" },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "orderIdx": { "type": "integer" }
+      },
+      "required": [ "name", "level", "orderIdx" ]
+    },
+    "project": {
+      "type": "array",
+      "description": "An array of projects or experiences or summary",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "link": {
+            "type": "string",
+            "format": "uri"
+          },
+          "content": { "type": "string" },
+          "date": { "type": "string" },
+          "orderIdx": { "type": "integer" }
+        },
+        "required": [ "name", "content", "orderIdx" ]
+      }
+    }
+  }
 }
+
 ```
 
 ```bash
