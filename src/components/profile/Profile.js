@@ -25,9 +25,14 @@ const Profile = (props) => {
     const path = props?.path?.split("/");
     getCvById(path[path.length - 1])
       .then((res) => {
-        setValid(validator.profileSchemaValidate(res));
-        
-        if (valid !== true) {
+        if (res) {
+          const profileSchema = validator.profileSchemaValidate(res);
+          setValid(profileSchema);
+        } else {
+          setValid(null);
+        }
+
+        if (res && valid !== true) {
           valid.forEach((error) => {
             const message = {
               severity: "error",
@@ -40,14 +45,16 @@ const Profile = (props) => {
           });
         } else {
           setProfile(res);
+          setLoading(false);
         }
 
         setLoading(props?.projects && props?.experience);
       })
       .catch(() => {
         setLoading(false);
+        setProfile({});
       });
-  }, [valid != null]);
+  }, [props?.path, valid != null, valid == true]);
 
   useEffect(() => {
     const path = props?.path?.split("/");
@@ -57,7 +64,7 @@ const Profile = (props) => {
           setImage(res ? res : "");
         })
         .catch(() => {
-          setImage("")
+          setImage("");
         });
     } else {
       setImage("");
@@ -139,7 +146,7 @@ const Profile = (props) => {
         {renderContentView(data?.projects)}
         <h3 hidden={!data?.experience}>Experience</h3>
         {renderContentView(data?.experience)}
-        {!data?.projects && !data?.experience && !loading &&(
+        {!data?.projects && !data?.experience && !loading && (
           <h3>No data found!</h3>
         )}
       </>
