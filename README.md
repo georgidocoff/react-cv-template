@@ -44,124 +44,224 @@ To run this project, you will need the following software:
 
 ```
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "description": "Person Name"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "certificates": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Certificate"
+        }
+      },
+      "contacts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Contact"
+        }
+      },
+      "educations": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Education"
+        }
+      },
+      "experience": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Experience"
+        }
+      },
+      "hobies": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Hobie"
+        }
+      },
+      "languages": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Language"
+        }
+      },
+      "name": {
+        "type": "string"
+      },
+      "projects": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Project"
+        }
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Skill"
+        }
+      },
+      "summary": {
+        "$ref": "#/definitions/Experience"
+      }
     },
-    "contacts": {
-      "type": "array",
-      "description": "An array of contact information",
-      "items": {
+    "definitions": {
+      "Certificate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Contact": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string"
           },
           "type": {
-            "type": "string",
-            "description": "Posible typies: emial, phone, location, linkedin"
+            "type": "string"
           },
           "class": {
-            "type": "string",
-            "description": "For selected typies: contact-email, contact-phone, contact-location, contact-linkedin"
+            "type": "string"
           },
           "icon": {
-            "type": "string",
-            "description": "For selected typies: pi pi-envelope mr-2, pi pi-mobile mr-2, pi pi-home mr-2, pi pi-linkedin mr-2"
+            "type": "string"
           }
-        },
-        "required": [ "name", "type", "class", "icon" ]
-      }
-    },
-    "skills": {
-      "type": "array",
-      "description": "An array of skills",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
-    },
-    "educations": {
-      "type": "array",
-      "description": "An array of educations",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
-    },
-    "certificates": {
-      "type": "array",
-      "description": "An array of certificates",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
-    },
-    "languages": {
-      "type": "array",
-      "description": "An array of languages",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
-    },
-    "hobies": {
-      "type": "array",
-      "description": "An array of hobies",
-      "items": {
-        "$ref": "#/definitions/item"
-      }
-    },
-    "projects": {
-      "$ref": "#/definitions/project"
-    },
-    "experience": {
-      "$ref": "#/definitions/project"
-    },
-    "summary": {
-      "$ref": "#/definitions/project"
-    }
-  },
-  "required": [ "name", "contacts" ],
-  "definitions": {
-    "item": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "link": {
-          "type": "string",
-          "format": "uri"
-        },
-        "type": { "type": "string" },
-        "level": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 5
-        },
-        "orderIdx": { "type": "integer" }
+        }
       },
-      "required": [ "name", "level", "orderIdx" ]
-    },
-    "project": {
-      "type": "array",
-      "description": "An array of projects or experiences or summary",
-      "items": {
+      "Education": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
-          "link": {
-            "type": "string",
-            "format": "uri"
+          "name": {
+            "type": "string"
           },
-          "content": { "type": "string" },
-          "date": { "type": "string" },
-          "orderIdx": { "type": "integer" }
-        },
-        "required": [ "name", "content", "orderIdx" ]
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Experience": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Hobie": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Language": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
       }
     }
   }
-}
-
 ```
 
 ```bash
