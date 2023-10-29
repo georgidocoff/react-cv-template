@@ -16,11 +16,8 @@ const Profile = (props) => {
 
   const [profile, setProfile] = useState({});
   const [image, setImage] = useState("");
-  const [loading, setLoading] = useState(
-    !props?.projects && !props?.experience
-  );
+  const [loading, setLoading] = useState(true);
   const [valid, setValid] = useState(null);
-  const [lastToastMessage, setLastToastMessage] = useState({});
 
   const toast = useRef(null);
 
@@ -60,10 +57,12 @@ const Profile = (props) => {
           setImage(res ? res : "");
         })
         .catch(() => {
-          setLoading(false);
+          setImage("")
         });
+    } else {
+      setImage("");
     }
-  }, [valid]);
+  }, [props?.path, valid]);
 
   const contactHandler = (data) => {
     if (data.includes("@")) {
@@ -140,7 +139,7 @@ const Profile = (props) => {
         {renderContentView(data?.projects)}
         <h3 hidden={!data?.experience}>Experience</h3>
         {renderContentView(data?.experience)}
-        {!loading && !data?.projects && !data?.experience && (
+        {!data?.projects && !data?.experience && !loading &&(
           <h3>No data found!</h3>
         )}
       </>
