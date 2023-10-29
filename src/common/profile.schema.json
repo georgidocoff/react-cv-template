@@ -1,0 +1,219 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "certificates": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Certificate"
+        }
+      },
+      "contacts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Contact"
+        }
+      },
+      "educations": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Education"
+        }
+      },
+      "experience": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Experience"
+        }
+      },
+      "hobies": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Hobie"
+        }
+      },
+      "languages": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Language"
+        }
+      },
+      "name": {
+        "type": "string"
+      },
+      "projects": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Project"
+        }
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Skill"
+        }
+      },
+      "summary": {
+        "$ref": "#/definitions/Experience"
+      }
+    },
+    "definitions": {
+      "Certificate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "class": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      },
+      "Education": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Experience": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Hobie": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Language": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      },
+      "Skill": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "integer"
+          },
+          "orderIdx": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }

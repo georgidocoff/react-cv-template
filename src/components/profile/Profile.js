@@ -1,44 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Image } from "primereact/image";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Toast } from "primereact/toast";
 
 import { getCvById, getImageByCvId } from "../../services/api";
+import validator from "../../services/validator";
 
 import "./Profile.css";
 
 const Profile = (props) => {
   const navigate = useNavigate();
+
   const [profile, setProfile] = useState({});
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(
     !props?.projects && !props?.experience
   );
+  const [valid, setValid] = useState(null);
+  const [lastToastMessage, setLastToastMessage] = useState({});
+
+  const toast = useRef(null);
 
   useEffect(() => {
     const path = props?.path?.split("/");
     getCvById(path[path.length - 1])
       .then((res) => {
+        setValid(validator.profileSchemaValidate(res));
+        
+        if (valid !== true) {
+          valid.forEach((error) => {
+            const message = {
+              severity: "error",
+              summary: "Error with json schema from responce",
+              detail: `Error at '${error.instancePath}' keyword '${error.keyword}' with message '${error.message}'`,
+              sticky: true,
+            };
+
+            toast.current.show(message);
+          });
+        } else {
+          setProfile(res);
+        }
+
         setLoading(props?.projects && props?.experience);
-        setProfile(res ? JSON.parse(res) : {});
       })
       .catch(() => {
         setLoading(false);
       });
-  }, []);
+  }, [valid != null]);
 
   useEffect(() => {
     const path = props?.path?.split("/");
-    getImageByCvId(path[path.length - 1])
-      .then((res) => {
-        setImage(res ? res : "");
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, []);
+    if (valid === true) {
+      getImageByCvId(path[path.length - 1])
+        .then((res) => {
+          setImage(res ? res : "");
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    }
+  }, [valid]);
+
   const contactHandler = (data) => {
     if (data.includes("@")) {
       window.open(`mailto:${data}`, "_blank");
@@ -160,6 +186,7 @@ const Profile = (props) => {
   return (
     <>
       <div className="cv-card flex">
+        <Toast ref={toast} />
         <Image
           src={
             image == ""

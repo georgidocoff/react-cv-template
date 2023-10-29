@@ -19,6 +19,26 @@ border-radius: 10px;
 margin-bottom: 1rem;
 } */
 
+.p-toast-message-icon{
+    padding-right: 1rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.p-toast-icon-close-icon{
+    width: 2rem;
+}
+.p-toast .p-toast-message-error{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    background-color: aliceblue;
+    border-radius: 1rem;
+    
+    font-family: sans-serif;
+    color: red;
+}
+
 @media only screen and (min-width: 961px) {
     .cv-card {
         border-color: aliceblue;
