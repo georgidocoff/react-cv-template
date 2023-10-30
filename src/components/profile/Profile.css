@@ -162,7 +162,7 @@ margin-bottom: 1rem;
     .cv-content {
         position: relative !important;
         left: 280px;
-        max-width: 60vw !important;
+        max-width: 67vw !important;
         text-align: justify !important;
         /* font-family: sans-serif; */
     }
@@ -402,9 +402,10 @@ margin-bottom: 1rem;
     
     .cv-content {
         position: relative !important;
-        left: 280px;
-        max-width: 60vw !important;
+        left: 330px;
+        max-width: 67vw !important;
         text-align: justify !important;
         /* font-family: sans-serif; */
+        zoom: 87%;
     }
 }

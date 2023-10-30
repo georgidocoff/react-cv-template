@@ -18,6 +18,7 @@ const Profile = (props) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [valid, setValid] = useState(null);
+  const [showLink, setShowLink] = useState(null);
 
   const toast = useRef(null);
 
@@ -140,10 +141,13 @@ const Profile = (props) => {
   };
 
   const contentView = (data) => {
+    let summary = [];
+    summary.push(data?.summary);
     return (
       <>
         <h3 hidden={!data?.projects}>Projects</h3>
         {renderContentView(data?.projects)}
+        {summary.length > 0 && renderContentView(summary)}
         <h3 hidden={!data?.experience}>Experience</h3>
         {renderContentView(data?.experience)}
         {!data?.projects && !data?.experience && !loading && (
@@ -157,7 +161,29 @@ const Profile = (props) => {
     return view?.map((e) => {
       return (
         <div key={e.orderIdx} className="left-text mb-2">
-          <div>{e.name}</div>
+          {(e?.link && (
+            <Button
+              onMouseOver={() => {
+                setShowLink(e?.name);
+              }}
+              onMouseLeave={() => {
+                setShowLink(null);
+              }}
+              style={{
+                backgroundColor:
+                  showLink && showLink === e?.name ? "white" : "transparent",
+                color: showLink && showLink === e?.name ? "black" : "white",
+                border: showLink && showLink === e?.name ? ".5mm ridge black" : "none",
+                borderRadius: showLink && showLink === e?.name? "1rem" :null,
+              }}
+              label={
+                showLink && showLink === e?.name ? e?.link : e?.name || e?.link
+              }
+              onClick={() => {
+                window.open(`${e?.link}`, "_blank");
+              }}
+            />
+          )) || <div>{e.name}</div>}
           <div>
             <i>{e.type}</i>
           </div>
@@ -169,11 +195,11 @@ const Profile = (props) => {
   function renderContentView(view) {
     return view?.map((e) => {
       return (
-        <div key={e.orderIdx} className="mb-2">
+        <div key={e?.orderIdx || 0} className="mb-2">
           <div>
-            <b>{e.name}</b>
+            <b>{e?.name}</b>
           </div>
-          {(e.link && (
+          {(e?.link && (
             <Button
               style={{ backgroundColor: "transparent", border: "none" }}
               label={e?.content || e?.link}
@@ -181,9 +207,9 @@ const Profile = (props) => {
                 window.open(`${e?.link}`, "_blank");
               }}
             />
-          )) || <div>{e.content}</div>}
+          )) || <div>{e?.content}</div>}
 
-          <div>{e.date}</div>
+          <div>{e?.date}</div>
         </div>
       );
     });
