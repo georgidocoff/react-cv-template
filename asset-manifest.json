@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/React-Cv-Template/static/css/main.7edfa032.css",
-    "main.js": "/React-Cv-Template/static/js/main.d689ff2a.js",
+    "main.css": "/React-Cv-Template/static/css/main.bd773667.css",
+    "main.js": "/React-Cv-Template/static/js/main.f5c83142.js",
     "static/js/787.71060634.chunk.js": "/React-Cv-Template/static/js/787.71060634.chunk.js",
     "static/media/primeicons.svg": "/React-Cv-Template/static/media/primeicons.e1441b135b3ca9ad643c.svg",
     "static/media/primeicons.eot": "/React-Cv-Template/static/media/primeicons.d44157bdfa026dc877af.eot",
@@ -9,12 +9,12 @@
     "static/media/primeicons.ttf": "/React-Cv-Template/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
     "static/media/primeicons.woff2": "/React-Cv-Template/static/media/primeicons.78172950b335ccdb94e2.woff2",
     "index.html": "/React-Cv-Template/index.html",
-    "main.7edfa032.css.map": "/React-Cv-Template/static/css/main.7edfa032.css.map",
-    "main.d689ff2a.js.map": "/React-Cv-Template/static/js/main.d689ff2a.js.map",
+    "main.bd773667.css.map": "/React-Cv-Template/static/css/main.bd773667.css.map",
+    "main.f5c83142.js.map": "/React-Cv-Template/static/js/main.f5c83142.js.map",
     "787.71060634.chunk.js.map": "/React-Cv-Template/static/js/787.71060634.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7edfa032.css",
-    "static/js/main.d689ff2a.js"
+    "static/css/main.bd773667.css",
+    "static/js/main.f5c83142.js"
   ]
 }
